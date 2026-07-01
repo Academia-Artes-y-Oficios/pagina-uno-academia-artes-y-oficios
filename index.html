@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Academia Artes y Oficios | Cursos y Talleres</title>
+  <meta name="description" content="Academia Artes y Oficios: formación práctica en artes, oficios, belleza, negocios, emprendimiento y cursos virtuales en Guácimo.">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --azul-oscuro:#082b63;
+      --azul:#0756b8;
+      --celeste:#18a7df;
+      --celeste-claro:#dff6ff;
+      --verde:#63b432;
+      --verde-oscuro:#2f7b19;
+      --blanco:#ffffff;
+      --gris:#f5f8fc;
+      --texto:#10223f;
+      --sombra:0 14px 35px rgba(8,43,99,.15);
+      --radius:22px;
+    }
+
+    *{scroll-behavior:smooth;}
+    body{
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--texto);
+      background:linear-gradient(180deg,#ffffff 0%,#f3f9ff 48%,#ffffff 100%);
+    }
+
+    .navbar{
+      background:rgba(255,255,255,.95);
+      backdrop-filter:blur(14px);
+      box-shadow:0 5px 20px rgba(8,43,99,.08);
+    }
+    .brand-text{font-weight:900;color:var(--azul-oscuro);line-height:1.05;}
+    .nav-link{font-weight:700;color:var(--azul-oscuro)!important;}
+    .nav-link:hover{color:var(--celeste)!important;}
+
+    .btn-primary-custom{
+      background:linear-gradient(135deg,var(--azul-oscuro),var(--azul),var(--celeste));
+      border:0;color:white;font-weight:800;border-radius:999px;padding:.85rem 1.25rem;
+      box-shadow:0 10px 25px rgba(7,86,184,.25);
+    }
+    .btn-primary-custom:hover{color:white;transform:translateY(-1px);}
+    .btn-outline-custom{
+      border:2px solid var(--azul);color:var(--azul);font-weight:800;border-radius:999px;padding:.75rem 1.15rem;background:white;
+    }
+    .btn-outline-custom:hover{background:var(--azul);color:white;}
+
+    .hero{
+      position:relative;overflow:hidden;padding:120px 0 70px;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(24,167,223,.20), transparent 32%),
+        radial-gradient(circle at 10% 80%, rgba(99,180,50,.16), transparent 30%),
+        linear-gradient(135deg,#ffffff 0%,#eaf8ff 52%,#ffffff 100%);
+    }
+    .hero::before{
+      content:"";position:absolute;right:-110px;top:80px;width:390px;height:390px;border-radius:50%;
+      border:50px solid rgba(7,86,184,.10);
+    }
+    .badge-soft{
+      background:linear-gradient(135deg,#e2f6ff,#ffffff);color:var(--azul-oscuro);border:1px solid #b8e8fb;
+      border-radius:999px;font-weight:800;padding:.55rem 1rem;display:inline-flex;gap:.5rem;align-items:center;
+    }
+    .hero h1{font-size:clamp(2.2rem,5vw,4.8rem);font-weight:950;letter-spacing:-.04em;color:var(--azul-oscuro);}
+    .hero h1 span{background:linear-gradient(135deg,var(--azul),var(--celeste));-webkit-background-clip:text;background-clip:text;color:transparent;}
+    .hero-card{
+      background:white;border-radius:var(--radius);box-shadow:var(--sombra);padding:1.3rem;border:1px solid rgba(24,167,223,.18);
+    }
+    .mini-stat{background:var(--gris);border-radius:18px;padding:1rem;height:100%;}
+    .mini-stat i{font-size:1.7rem;color:var(--azul);}
+
+    .section-title{font-weight:950;color:var(--azul-oscuro);letter-spacing:-.03em;}
+    .section-subtitle{color:#49627f;max-width:760px;margin:auto;}
+
+    .category-pill{border:0;border-radius:999px;padding:.65rem 1rem;font-weight:800;background:white;color:var(--azul-oscuro);box-shadow:0 8px 20px rgba(8,43,99,.08);}
+    .category-pill.active,.category-pill:hover{background:linear-gradient(135deg,var(--azul-oscuro),var(--azul));color:white;}
+
+    .course-card{
+      border:0;border-radius:var(--radius);overflow:hidden;background:white;box-shadow:var(--sombra);height:100%;
+      transition:.25s ease;position:relative;
+    }
+    .course-card:hover{transform:translateY(-5px);}
+    .course-top{height:9px;background:linear-gradient(90deg,var(--azul-oscuro),var(--azul),var(--celeste),var(--verde));}
+    .course-icon{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;color:white;font-size:1.5rem;background:linear-gradient(135deg,var(--azul),var(--celeste));}
+    .price{font-weight:950;color:var(--azul-oscuro);font-size:1.35rem;}
+    .tag{font-size:.78rem;font-weight:800;border-radius:999px;background:#edf8ff;color:var(--azul-oscuro);padding:.35rem .6rem;display:inline-block;}
+
+    .offer-box{
+      background:linear-gradient(135deg,var(--azul-oscuro),var(--azul),var(--celeste));color:white;border-radius:30px;padding:2rem;box-shadow:var(--sombra);position:relative;overflow:hidden;
+    }
+    .offer-box::after{content:"";position:absolute;right:-70px;bottom:-70px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.12);}
+    .timer-card{background:white;color:var(--azul-oscuro);border-radius:22px;padding:1.2rem;text-align:center;min-width:92px;box-shadow:0 10px 24px rgba(0,0,0,.15);}
+    .timer-card strong{font-size:2rem;font-weight:950;display:block;}
+
+    .virtual-card,.testimonial-card,.contact-card,.cart-panel{
+      background:white;border-radius:var(--radius);box-shadow:var(--sombra);border:1px solid rgba(24,167,223,.16);
+    }
+    .testimonial-card{padding:1.5rem;height:100%;}
+    .quote{font-size:2.4rem;color:var(--celeste);line-height:1;}
+
+    .cart-panel{position:sticky;top:92px;padding:1.2rem;}
+    .cart-item{border-bottom:1px solid #e5edf7;padding:.65rem 0;}
+    .cart-item:last-child{border-bottom:0;}
+
+    .footer{background:linear-gradient(135deg,#061f4c,#083b85,#0756b8);color:white;padding:2.5rem 0;margin-top:4rem;}
+    .footer a{color:white;text-decoration:none;}
+
+    .floating-wa{
+      position:fixed;right:18px;bottom:18px;z-index:1040;width:62px;height:62px;border-radius:50%;
+      display:grid;place-items:center;background:#25D366;color:white;font-size:2rem;box-shadow:0 12px 30px rgba(37,211,102,.35);text-decoration:none;
+    }
+
+    .chatbot-demo{
+      position:fixed;right:18px;bottom:92px;z-index:1030;width:min(350px,calc(100vw - 36px));display:none;
+    }
+    .chatbot-demo.show{display:block;}
+    .chatbot-head{background:linear-gradient(135deg,var(--azul-oscuro),var(--azul));color:white;border-radius:18px 18px 0 0;padding:1rem;font-weight:850;}
+    .chatbot-body{background:white;border-radius:0 0 18px 18px;box-shadow:var(--sombra);padding:1rem;border:1px solid #d8eafa;}
+
+    @media(max-width:768px){
+      .hero{padding-top:95px;}
+      .timer-card{min-width:72px;padding:.8rem;}
+      .timer-card strong{font-size:1.45rem;}
+      .cart-panel{position:relative;top:0;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#inicio">
+        <span class="rounded-circle d-inline-flex align-items-center justify-content-center" style="width:44px;height:44px;background:linear-gradient(135deg,var(--azul),var(--celeste));color:white;font-weight:950;">A</span>
+        <span class="brand-text">Academia<br>Artes y Oficios</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#catalogo">Catálogo</a></li>
+          <li class="nav-item"><a class="nav-link" href="#ofertas">Ofertas</a></li>
+          <li class="nav-item"><a class="nav-link" href="#virtuales">Virtuales</a></li>
+          <li class="nav-item"><a class="nav-link" href="#testimonios">Testimonios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#carrito">Carrito</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+        </ul>
+        <a class="btn btn-primary-custom ms-lg-3" href="https://wa.me/50688342439?text=Hola%20Academia%20Artes%20y%20Oficios,%20quiero%20informaci%C3%B3n%20sobre%20los%20cursos" target="_blank">Reservar por WhatsApp</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="inicio" class="hero">
+    <div class="container position-relative">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+          <span class="badge-soft mb-3"><i class="bi bi-stars"></i> Oferta académica julio y agosto 2026</span>
+          <h1>Aprende, crea y <span>transforma tu futuro</span></h1>
+          <p class="lead mt-3 mb-4">Cursos y talleres prácticos para todas las edades en artes, oficios, belleza, negocios, idiomas, mecánica, emprendimiento y formación laboral.</p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#catalogo" class="btn btn-primary-custom">Ver catálogo de cursos</a>
+            <a href="#ofertas" class="btn btn-outline-custom">Ver oferta activa</a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="hero-card">
+            <h3 class="fw-bold text-primary-emphasis">Formación práctica que vende resultados</h3>
+            <p>En la Academia no solo llevas un curso: desarrollas habilidades para emprender, mejorar tus ingresos y abrir nuevas oportunidades.</p>
+            <div class="row g-3 mt-2">
+              <div class="col-6"><div class="mini-stat"><i class="bi bi-person-workspace"></i><h6 class="fw-bold mt-2">Modalidad flexible</h6><small>Presencial y virtual.</small></div></div>
+              <div class="col-6"><div class="mini-stat"><i class="bi bi-bag-check"></i><h6 class="fw-bold mt-2">Compra fácil</h6><small>WhatsApp, SINPE o link de pago.</small></div></div>
+              <div class="col-6"><div class="mini-stat"><i class="bi bi-lightbulb"></i><h6 class="fw-bold mt-2">Aprendizaje práctico</h6><small>Proyectos reales.</small></div></div>
+              <div class="col-6"><div class="mini-stat"><i class="bi bi-robot"></i><h6 class="fw-bold mt-2">Chatbot IA</h6><small>Consultas frecuentes 24/7.</small></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CATALOGO -->
+  <section id="catalogo" class="py-5">
+    <div class="container">
+      <div class="text-center mb-4">
+        <h2 class="section-title display-6">Catálogo visual de cursos y talleres</h2>
+        <p class="section-subtitle">Elige el curso que te acerca a tu meta. Agrega al carrito o reserva tu cupo por WhatsApp.</p>
+      </div>
+
+      <div class="d-flex flex-wrap justify-content-center gap-2 mb-4" id="categoryFilters">
+        <button class="category-pill active" data-filter="todos">Todos</button>
+        <button class="category-pill" data-filter="negocios">Negocios</button>
+        <button class="category-pill" data-filter="arte">Arte</button>
+        <button class="category-pill" data-filter="belleza">Belleza</button>
+        <button class="category-pill" data-filter="tecnicos">Oficios técnicos</button>
+        <button class="category-pill" data-filter="danza">Danza</button>
+        <button class="category-pill" data-filter="virtual">Virtuales</button>
+      </div>
+
+      <div class="row g-4" id="coursesContainer"></div>
+    </div>
+  </section>
+
+  <!-- OFERTAS -->
+  <section id="ofertas" class="py-5">
+    <div class="container">
+      <div class="offer-box">
+        <div class="row align-items-center g-4 position-relative">
+          <div class="col-lg-7">
+            <span class="badge bg-light text-primary fw-bold mb-3">Oferta relámpago</span>
+            <h2 class="fw-black display-6 fw-bold">Reserva ahora y recibe atención prioritaria de matrícula</h2>
+            <p class="lead">Durante los próximos 10 minutos puedes apartar tu cupo por WhatsApp y confirmar tu forma de pago.</p>
+            <a class="btn btn-light fw-bold rounded-pill px-4 py-3" href="https://wa.me/50688342439?text=Hola,%20quiero%20aprovechar%20la%20oferta%20rel%C3%A1mpago%20y%20reservar%20mi%20cupo" target="_blank">Aprovechar oferta</a>
+          </div>
+          <div class="col-lg-5">
+            <div class="d-flex justify-content-lg-end justify-content-center gap-2" id="timer">
+              <div class="timer-card"><strong id="min">10</strong><small>Minutos</small></div>
+              <div class="timer-card"><strong id="sec">00</strong><small>Segundos</small></div>
+            </div>
+            <p class="text-center text-lg-end mt-3 mb-0">Cuando el contador llegue a cero, la oferta se reinicia para una nueva visita.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIRTUALES -->
+  <section id="virtuales" class="py-5">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-5">
+          <h2 class="section-title display-6">Cursos virtuales</h2>
+          <p class="section-subtitle mx-0">Aprende desde casa con acompañamiento, horarios accesibles y materiales digitales.</p>
+          <a href="#catalogo" class="btn btn-primary-custom mt-3">Ver cursos virtuales</a>
+        </div>
+        <div class="col-lg-7">
+          <div class="row g-3">
+            <div class="col-md-4"><div class="virtual-card p-4 h-100"><i class="bi bi-laptop fs-1 text-primary"></i><h5 class="fw-bold mt-3">Servicio al Cliente</h5><p>4 semanas virtuales para mejorar la atención y experiencia del cliente.</p></div></div>
+            <div class="col-md-4"><div class="virtual-card p-4 h-100"><i class="bi bi-music-note-beamed fs-1 text-primary"></i><h5 class="fw-bold mt-3">Clases de canto</h5><p>Sesiones virtuales sincrónicas para desarrollar técnica y expresión.</p></div></div>
+            <div class="col-md-4"><div class="virtual-card p-4 h-100"><i class="bi bi-briefcase fs-1 text-primary"></i><h5 class="fw-bold mt-3">Registro de Planillas</h5><p>Formación laboral práctica para fortalecer competencias administrativas.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section id="testimonios" class="py-5 bg-white">
+    <div class="container">
+      <div class="text-center mb-4">
+        <h2 class="section-title display-6">Lo que vivirás en la Academia</h2>
+        <p class="section-subtitle">Puedes sustituir estos testimonios por comentarios reales de tus estudiantes cuando los tengas.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4"><div class="testimonial-card"><div class="quote">“</div><p>Aprendí una habilidad práctica y ahora tengo más confianza para emprender.</p><strong>Estudiante de manualidades</strong></div></div>
+        <div class="col-md-4"><div class="testimonial-card"><div class="quote">“</div><p>Los cursos son claros, cercanos y aplicables a la vida real.</p><strong>Participante de negocios</strong></div></div>
+        <div class="col-md-4"><div class="testimonial-card"><div class="quote">“</div><p>Un espacio creativo, humano y motivador para aprender algo nuevo.</p><strong>Familia participante</strong></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARRITO Y CONTACTO -->
+  <section id="carrito" class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <h2 class="section-title display-6">Carrito / compra</h2>
+          <p>Agrega cursos al carrito. Esta primera versión simula la compra y dirige al cliente a WhatsApp para confirmar matrícula y pago.</p>
+          <div class="contact-card p-4 mt-4" id="contacto">
+            <h4 class="fw-bold"><i class="bi bi-geo-alt-fill text-primary"></i> Contacto</h4>
+            <p class="mb-1"><strong>Ubicación:</strong> Costado norte de la CCSS, Guácimo.</p>
+            <p class="mb-1"><strong>WhatsApp:</strong> 8834 2439</p>
+            <p class="mb-3"><strong>Redes sociales:</strong> Facebook, Instagram y TikTok: Academia Artes y Oficios</p>
+            <div class="d-flex flex-wrap gap-2">
+              <a class="btn btn-primary-custom" target="_blank" href="https://wa.me/50688342439">Escribir por WhatsApp</a>
+              <a class="btn btn-outline-custom" href="mailto:info@academiaartesyoficios.com">Enviar correo</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="cart-panel">
+            <h4 class="fw-bold mb-3"><i class="bi bi-cart3"></i> Mi carrito</h4>
+            <div id="cartItems"><p class="text-muted">Aún no has agregado cursos.</p></div>
+            <div class="d-flex justify-content-between align-items-center border-top pt-3 mt-3">
+              <strong>Total estimado:</strong><strong class="price" id="cartTotal">₡0</strong>
+            </div>
+            <button class="btn btn-primary-custom w-100 mt-3" id="checkoutBtn">Confirmar por WhatsApp</button>
+            <div class="small text-muted mt-3">
+              Opciones de pago externo: SINPE Móvil, link de pago, PayPal o plataforma disponible. Coloca aquí tus enlaces reales cuando los tengas.
+            </div>
+            <div class="d-grid gap-2 mt-3">
+              <a class="btn btn-outline-custom" href="#" onclick="alert('Aquí puedes colocar tu link real de PayPal o pasarela de pago externa.');return false;">Link de pago externo</a>
+              <a class="btn btn-outline-custom" href="#" onclick="alert('SINPE Móvil: 8834 2439. Confirma el comprobante por WhatsApp.');return false;">Pagar por SINPE Móvil</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHATBOT -->
+  <section id="chatbot" class="py-5 bg-white">
+    <div class="container text-center">
+      <h2 class="section-title display-6">Chatbot inteligente con Flowise</h2>
+      <p class="section-subtitle">Esta zona queda lista para insertar el código embed de Flowise. Mientras tanto, el botón inferior muestra una simulación básica de preguntas frecuentes.</p>
+      <button class="btn btn-primary-custom mt-3" id="toggleChat">Probar chatbot demo</button>
+      <pre class="text-start bg-light p-3 rounded-4 mt-4 small"><code>&lt;!-- Pega aquí el script de Flowise cuando tengas tu chatbot publicado --&gt;
+&lt;script type="module"&gt;
+  import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js";
+  Chatbot.init({
+    chatflowid: "TU_CHATFLOW_ID",
+    apiHost: "https://TU_DOMINIO_FLOWISE"
+  });
+&lt;/script&gt;</code></pre>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-5"><h3 class="fw-bold">Academia Artes y Oficios</h3><p class="mb-0">Aprender haciendo, crecer creando.</p></div>
+        <div class="col-md-4"><p class="mb-1"><i class="bi bi-whatsapp"></i> 8834 2439</p><p class="mb-0"><i class="bi bi-geo-alt"></i> Costado norte de la CCSS, Guácimo.</p></div>
+        <div class="col-md-3 text-md-end"><a href="#inicio">Volver al inicio</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <a class="floating-wa" href="https://wa.me/50688342439?text=Hola%20Academia%20Artes%20y%20Oficios,%20quiero%20reservar%20un%20curso" target="_blank" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+
+  <div class="chatbot-demo" id="chatbotDemo">
+    <div class="chatbot-head d-flex justify-content-between align-items-center">
+      <span><i class="bi bi-robot"></i> Asistente Academia</span>
+      <button class="btn btn-sm btn-light" id="closeChat">X</button>
+    </div>
+    <div class="chatbot-body">
+      <p><strong>Hola, soy tu asistente virtual.</strong></p>
+      <p class="small">Puedo ayudarte con horarios, precios, modalidad, matrícula y formas de pago.</p>
+      <div class="d-grid gap-2">
+        <button class="btn btn-outline-primary btn-sm" onclick="botAnswer('Tenemos cursos presenciales y virtuales. Puedes ver el catálogo completo en la sección de cursos.')">¿Qué cursos tienen?</button>
+        <button class="btn btn-outline-primary btn-sm" onclick="botAnswer('Puedes reservar por WhatsApp al 8834 2439. También puedes usar el carrito de esta página.')">¿Cómo reservo?</button>
+        <button class="btn btn-outline-primary btn-sm" onclick="botAnswer('Estamos costado norte de la CCSS, Guácimo.')">¿Dónde están ubicados?</button>
+      </div>
+      <div class="alert alert-info mt-3 mb-0 small" id="botResponse">Selecciona una pregunta.</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const WHATSAPP = "50688342439";
+
+    const courses = [
+      {name:"Servicio al Cliente", category:"negocios virtual", price:20000, modality:"Virtual", duration:"4 semanas", schedule:"Martes 6:00 p.m. - 9:00 p.m.", start:"7 agosto 2026", icon:"bi-headset"},
+      {name:"Contabilidad Básica para Emprendedores", category:"negocios", price:40000, modality:"Presencial", duration:"8 semanas", schedule:"Viernes 5:00 p.m. - 8:00 p.m.", start:"17 julio 2026", icon:"bi-calculator"},
+      {name:"Emprendedurismo: Inicie su Negocio", category:"negocios", price:40000, modality:"Presencial / Virtual", duration:"8 semanas", schedule:"Jueves 2:00 p.m. - 5:00 p.m.", start:"16 julio 2026", icon:"bi-rocket-takeoff"},
+      {name:"Registro de Planillas", category:"negocios virtual", price:35000, modality:"Virtual", duration:"4 semanas", schedule:"Martes 6:00 p.m. - 9:00 p.m.", start:"18 agosto 2026", icon:"bi-file-earmark-spreadsheet"},
+
+      {name:"Baile popular niños de 4 a 7 años", category:"danza", price:15000, modality:"Presencial", duration:"Mensual", schedule:"Lunes 4:30 p.m. - 5:30 p.m.", start:"6 julio 2026", icon:"bi-universal-access"},
+      {name:"Baile popular niños de 8 a 13 años", category:"danza", price:15000, modality:"Presencial", duration:"Mensual", schedule:"Lunes 3:00 p.m. - 4:00 p.m.", start:"6 julio 2026", icon:"bi-music-note"},
+      {name:"Baile popular adultos", category:"danza", price:15000, modality:"Presencial", duration:"Mensual", schedule:"Lunes 6:00 p.m. - 7:00 p.m.", start:"22 junio 2026", icon:"bi-person-arms-up"},
+
+      {name:"Curso de Pintura en Tela", category:"arte", price:5000, modality:"Presencial", duration:"Por sesión", schedule:"Viernes 9:00 a.m. - 12:00 m.d.", start:"Curso abierto", icon:"bi-palette"},
+      {name:"Pintura Acrílica para Niños", category:"arte", price:12000, modality:"Presencial", duration:"2 sesiones", schedule:"Martes y miércoles 9:00 a.m. - 12:00 m.d.", start:"7 y 8 julio 2026", icon:"bi-brush"},
+      {name:"Taller: Kokedamas y Terrarios", category:"arte", price:30000, modality:"Presencial", duration:"1 taller", schedule:"Sábado 1:00 p.m. - 5:00 p.m.", start:"29 agosto 2026", icon:"bi-flower1"},
+      {name:"Cosmética Natural", category:"arte belleza", price:25000, modality:"Presencial", duration:"1 taller", schedule:"Domingo 8:00 a.m. - 12:00 m.d.", start:"5 julio 2026", icon:"bi-droplet-half"},
+      {name:"Taller Velas 1", category:"arte", price:25000, modality:"Presencial", duration:"1 taller", schedule:"Sábado 1:00 p.m. - 5:00 p.m.", start:"18 julio 2026", icon:"bi-fire"},
+      {name:"Taller Velas 2", category:"arte", price:25000, modality:"Presencial", duration:"1 taller", schedule:"Domingo 8:00 a.m. - 12:00 m.d.", start:"19 julio 2026", icon:"bi-fire"},
+      {name:"Taller de Bonsái", category:"arte", price:45000, modality:"Presencial", duration:"1 taller", schedule:"Sábado 9:00 a.m. - 3:00 p.m.", start:"11 julio 2026", icon:"bi-tree"},
+      {name:"Dibujo artístico", category:"arte", price:5000, modality:"Presencial", duration:"Clases semanales", schedule:"Miércoles 6:00 p.m. - 9:00 p.m.", start:"1 julio 2026", icon:"bi-pencil"},
+      {name:"Pintura Acrílica", category:"arte", price:5000, modality:"Presencial", duration:"Clases semanales", schedule:"Miércoles 2:00 p.m. - 5:00 p.m.", start:"1 julio 2026", icon:"bi-easel"},
+
+      {name:"Programa Manicure y Pedicure", category:"belleza", price:10000, modality:"Presencial", duration:"Matrícula + sesión", schedule:"Sábados 9:00 a.m. - 12:00 m.d.", start:"8 al 29 agosto 2026", icon:"bi-stars"},
+      {name:"Clases de canto", category:"belleza virtual", price:10000, modality:"Virtual sincrónico", duration:"Por sesión", schedule:"Lunes 5:00 p.m. - 6:00 p.m. o jueves 3:00 p.m. - 4:00 p.m.", start:"A partir del 15 junio 2026", icon:"bi-mic"},
+
+      {name:"Mecánica para conductores", category:"tecnicos", price:40000, modality:"Presencial", duration:"2 sesiones", schedule:"Martes y miércoles 6:00 p.m. - 9:00 p.m.", start:"21 y 22 julio 2026", icon:"bi-tools"},
+      {name:"Mecánica para motos de bajo cilindraje", category:"tecnicos", price:10000, modality:"Presencial", duration:"Matrícula + sesión", schedule:"Sábado 5:00 p.m. - 8:00 p.m.", start:"18 julio 2026", icon:"bi-wrench-adjustable"}
+    ];
+
+    const cart = [];
+    const container = document.getElementById('coursesContainer');
+
+    function formatCurrency(value){ return '₡' + value.toLocaleString('es-CR'); }
+
+    function renderCourses(filter='todos'){
+      container.innerHTML = '';
+      courses.filter(c => filter === 'todos' || c.category.includes(filter)).forEach((course,index)=>{
+        container.innerHTML += `
+          <div class="col-md-6 col-xl-4 course-wrap" data-category="${course.category}">
+            <div class="course-card">
+              <div class="course-top"></div>
+              <div class="card-body p-4">
+                <div class="d-flex align-items-start justify-content-between gap-3 mb-3">
+                  <div class="course-icon"><i class="bi ${course.icon}"></i></div>
+                  <span class="tag">${course.modality}</span>
+                </div>
+                <h5 class="fw-bold">${course.name}</h5>
+                <p class="small mb-1"><i class="bi bi-calendar-event text-primary"></i> <strong>Inicio:</strong> ${course.start}</p>
+                <p class="small mb-1"><i class="bi bi-clock text-primary"></i> <strong>Horario:</strong> ${course.schedule}</p>
+                <p class="small mb-3"><i class="bi bi-hourglass-split text-primary"></i> <strong>Duración:</strong> ${course.duration}</p>
+                <div class="d-flex justify-content-between align-items-center gap-2">
+                  <div class="price">${formatCurrency(course.price)}</div>
+                  <button class="btn btn-primary-custom btn-sm" onclick="addToCart(${index})">Comprar</button>
+                </div>
+                <a class="btn btn-outline-custom btn-sm w-100 mt-3" target="_blank" href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Hola, quiero reservar cupo en: ' + course.name)}">Reservar cupo</a>
+              </div>
+            </div>
+          </div>`;
+      });
+    }
+
+    function addToCart(index){
+      cart.push(courses[index]);
+      renderCart();
+    }
+
+    function removeFromCart(index){
+      cart.splice(index,1);
+      renderCart();
+    }
+
+    function renderCart(){
+      const cartItems = document.getElementById('cartItems');
+      const total = cart.reduce((sum,item)=>sum + item.price,0);
+      if(cart.length === 0){
+        cartItems.innerHTML = '<p class="text-muted">Aún no has agregado cursos.</p>';
+      }else{
+        cartItems.innerHTML = cart.map((item,index)=>`
+          <div class="cart-item d-flex justify-content-between gap-2">
+            <div><strong>${item.name}</strong><br><small>${item.modality} · ${formatCurrency(item.price)}</small></div>
+            <button class="btn btn-sm btn-outline-danger" onclick="removeFromCart(${index})"><i class="bi bi-trash"></i></button>
+          </div>`).join('');
+      }
+      document.getElementById('cartTotal').textContent = formatCurrency(total);
+    }
+
+    document.getElementById('checkoutBtn').addEventListener('click',()=>{
+      if(cart.length === 0){ alert('Agrega al menos un curso al carrito.'); return; }
+      const total = cart.reduce((sum,item)=>sum + item.price,0);
+      const list = cart.map(item => `- ${item.name}: ${formatCurrency(item.price)}`).join('\n');
+      const message = `Hola Academia Artes y Oficios, quiero confirmar mi compra/reserva:\n${list}\nTotal estimado: ${formatCurrency(total)}\nDeseo información para pagar por SINPE Móvil o link de pago.`;
+      window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`,'_blank');
+    });
+
+    document.querySelectorAll('.category-pill').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.category-pill').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        renderCourses(btn.dataset.filter);
+      });
+    });
+
+    // Contador 10 minutos
+    let remaining = 10 * 60;
+    setInterval(()=>{
+      remaining--;
+      if(remaining < 0) remaining = 10 * 60;
+      document.getElementById('min').textContent = String(Math.floor(remaining/60)).padStart(2,'0');
+      document.getElementById('sec').textContent = String(remaining%60).padStart(2,'0');
+    },1000);
+
+    // Demo chatbot
+    const chatbotDemo = document.getElementById('chatbotDemo');
+    document.getElementById('toggleChat').addEventListener('click',()=> chatbotDemo.classList.toggle('show'));
+    document.getElementById('closeChat').addEventListener('click',()=> chatbotDemo.classList.remove('show'));
+    function botAnswer(text){ document.getElementById('botResponse').textContent = text; }
+
+    renderCourses();
+  </script>
+</body>
+</html>
